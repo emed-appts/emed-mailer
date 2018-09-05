@@ -50,6 +50,22 @@
   revision = "ebe1bf3edb3325c393447059974de898d5133eb8"
 
 [[projects]]
+  branch = "v3"
+  digest = "1:7388652e2215a3f45d341d58766ed58317971030eb1cbd75f005f96ace8e9196"
+  name = "gopkg.in/alexcesaro/quotedprintable.v3"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "2caba252f4dc53eaf6b553000885530023f54623"
+
+[[projects]]
+  branch = "v2"
+  digest = "1:e096ada745e034a059752c202717baee0379b69db9473a90f59d103c973384cf"
+  name = "gopkg.in/gomail.v2"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "81ebce5c23dfd25c6c67194b37d3dd3f338c98b1"
+
+[[projects]]
   digest = "1:5abd6a22805b1919f6a6bca0ae58b13cef1f3412812f38569978f43ef02743d4"
   name = "gopkg.in/ini.v1"
   packages = ["."]
@@ -74,6 +90,7 @@
     "github.com/pkg/errors",
     "github.com/rs/zerolog",
     "github.com/rs/zerolog/log",
+    "gopkg.in/gomail.v2",
     "gopkg.in/ini.v1",
     "gopkg.in/urfave/cli.v2",
   ]
