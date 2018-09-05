@@ -72,6 +72,7 @@
     "github.com/coreos/go-semver/semver",
     "github.com/kardianos/minwinsvc",
     "github.com/pkg/errors",
+    "github.com/rs/zerolog",
     "github.com/rs/zerolog/log",
     "gopkg.in/ini.v1",
     "gopkg.in/urfave/cli.v2",
