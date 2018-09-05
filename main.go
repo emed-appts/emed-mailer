@@ -6,12 +6,15 @@ import (
 	"syscall"
 	"time"
 
+	"github.com/emed-appts/emedappts-mailer/pkg/version"
+
 	"gopkg.in/urfave/cli.v2"
 )
 
 func main() {
 	app := &cli.App{
 		Name:        "emedappt-mailer",
+		Version:     version.Version.String(),
 		Usage:       "eMedical Appointments Mailer Service",
 		Description: "Runs the mailer service, sending notifications about booked/cancelled appointments",
 		Compiled:    time.Now(),
