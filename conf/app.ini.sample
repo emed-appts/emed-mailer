@@ -1,0 +1,31 @@
+[general]
+; root path of stored data
+; includes log
+ROOT     = data/
+; schedule mailer notification interval
+; takes cron expressions, e.g. @hourly, @everey 1h30m or full cron expression
+SCHEDULE = 0 0 6 * * *
+
+[mail]
+; mail server
+SERVER   =
+; mail server port
+PORT     =
+; mail server user account
+USER     =
+; mail server user password
+PASSWORD =
+; mail address sent in "From" header
+FROM     =
+; mail address to send mails to
+TO       =
+; subject of mails
+SUBJECT  =
+
+[log]
+; set logging level
+LEVEL   = info
+; enable colored logging
+COLORED = false
+; enable pretty logging
+PRETTY  = false

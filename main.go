@@ -6,8 +6,11 @@ import (
 	"syscall"
 	"time"
 
+	"github.com/emed-appts/emedappts-mailer/pkg/config"
 	"github.com/emed-appts/emedappts-mailer/pkg/version"
 
+	"github.com/pkg/errors"
+	"github.com/rs/zerolog/log"
 	"gopkg.in/urfave/cli.v2"
 )
 
@@ -30,7 +33,25 @@ func main() {
 			return nil
 		},
 
+		Flags: []cli.Flag{
+			&cli.StringFlag{
+				Name:        "config",
+				Value:       "conf/app.ini",
+				Usage:       "set config path",
+				Destination: &config.Path,
+			},
+		},
+
 		Action: func(c *cli.Context) error {
+			// load config
+			err := config.Load()
+			if err != nil {
+				log.Fatal().
+					Msgf("%+v\n", errors.Wrap(err, "could not load config"))
+
+				return err
+			}
+
 			stop := make(chan os.Signal, 1)
 
 			// todo run action
