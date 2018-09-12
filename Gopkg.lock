@@ -2,130 +2,180 @@
 
 
 [[projects]]
+  digest = "1:b62a3c5b37db602bf1158e921da1a762315a4c37855fd418a14498aa87a342d5"
   name = "cloud.google.com/go"
   packages = ["civil"]
+  pruneopts = "UT"
   revision = "c728a003b238b26cef9ab6753a5dc424b331c3ad"
   version = "v0.27.0"
 
 [[projects]]
+  digest = "1:0ef770954bca104ee99b3b6b7f9b240605ac03517d9f98cbc1893daa03f3c038"
   name = "github.com/coreos/go-semver"
   packages = ["semver"]
+  pruneopts = "UT"
   revision = "8ab6407b697782a06568d4b7f1db25550ec2e4c6"
   version = "v0.2.0"
 
 [[projects]]
+  digest = "1:ffe9824d294da03b391f44e1ae8281281b4afc1bdaa9588c9097785e3af10cec"
   name = "github.com/davecgh/go-spew"
   packages = ["spew"]
+  pruneopts = "UT"
   revision = "8991bc29aa16c548c550c7ff78260e27b9ab7c73"
   version = "v1.1.1"
 
 [[projects]]
   branch = "master"
+  digest = "1:6f120164f62e62991d0f85562abe2002d438abb2ca80b7717a2f4ae2af1c6829"
   name = "github.com/denisenkom/go-mssqldb"
   packages = [
     ".",
-    "internal/cp"
+    "internal/cp",
   ]
+  pruneopts = "UT"
   revision = "1eb28afdf9b6e56cf673badd47545f844fe81103"
 
 [[projects]]
+  digest = "1:f45caa3c5c4541c3a73b9fa2b38db97fcbda57618eaaaf45dd5c728362ad8f09"
   name = "github.com/gobuffalo/packr"
   packages = ["."]
+  pruneopts = "UT"
   revision = "6c8156ee36301dd007342e79d81c99e7a7834337"
   version = "v1.13.5"
 
 [[projects]]
   branch = "master"
+  digest = "1:c411b6e8466c7934d87d3667796b13631bcad0f66377ce316279b55f4658b5f4"
   name = "github.com/kardianos/minwinsvc"
   packages = ["."]
+  pruneopts = "UT"
   revision = "cad6b2b879b0970e4245a20ebf1a81a756e2bb70"
 
 [[projects]]
+  digest = "1:40e195917a951a8bf867cd05de2a46aaf1806c50cf92eebf4c16f78cd196f747"
   name = "github.com/pkg/errors"
   packages = ["."]
+  pruneopts = "UT"
   revision = "645ef00459ed84a119197bfb8d8205042c6df63d"
   version = "v0.8.0"
 
 [[projects]]
+  digest = "1:0028cb19b2e4c3112225cd871870f2d9cf49b9b4276531f03438a88e94be86fe"
   name = "github.com/pmezard/go-difflib"
   packages = ["difflib"]
+  pruneopts = "UT"
   revision = "792786c7400a136282c1664665ae0a8db921c6c2"
   version = "v1.0.0"
 
 [[projects]]
+  digest = "1:d823cf8863c515f10fe9084d9688e8cf01084fd83dd11bcb67e13162c30b3a4a"
   name = "github.com/rs/zerolog"
   packages = [
     ".",
     "internal/cbor",
     "internal/json",
-    "log"
+    "log",
   ]
+  pruneopts = "UT"
   revision = "77db4b4f350e31be66a57c332acb7721cf9ff9bb"
   version = "v1.8.0"
 
 [[projects]]
+  digest = "1:ac83cf90d08b63ad5f7e020ef480d319ae890c208f8524622a2f3136e2686b02"
   name = "github.com/stretchr/objx"
   packages = ["."]
+  pruneopts = "UT"
   revision = "477a77ecc69700c7cdeb1fa9e129548e1c1c393c"
   version = "v0.1.1"
 
 [[projects]]
+  digest = "1:15a4a7e5afac3cea801fa24831fce3bf3b5bd3620cbf8355a07b7dbf06877883"
   name = "github.com/stretchr/testify"
   packages = [
     "assert",
-    "mock"
+    "mock",
   ]
+  pruneopts = "UT"
   revision = "f35b8ab0b5a2cef36673838d662e249dd9c94686"
   version = "v1.2.2"
 
 [[projects]]
   branch = "master"
+  digest = "1:7d80d5561efbfcfdc3e4720bf5e331d574fd6f1e531b115ecf568aab3e2b656d"
   name = "golang.org/x/crypto"
   packages = ["md4"]
+  pruneopts = "UT"
   revision = "0e37d006457bf46f9e6692014ba72ef82c33022c"
 
 [[projects]]
   branch = "master"
+  digest = "1:44fcc895e43261753828a1ee05d532caff3c56036f395240ce92d2cfde28f730"
   name = "golang.org/x/sys"
   packages = [
     "windows",
-    "windows/svc"
+    "windows/svc",
   ]
-  revision = "ebe1bf3edb3325c393447059974de898d5133eb8"
+  pruneopts = "UT"
+  revision = "d0be0721c37eeb5299f245a996a483160fc36940"
 
 [[projects]]
   branch = "v3"
+  digest = "1:7388652e2215a3f45d341d58766ed58317971030eb1cbd75f005f96ace8e9196"
   name = "gopkg.in/alexcesaro/quotedprintable.v3"
   packages = ["."]
+  pruneopts = "UT"
   revision = "2caba252f4dc53eaf6b553000885530023f54623"
 
 [[projects]]
   branch = "v2"
+  digest = "1:e096ada745e034a059752c202717baee0379b69db9473a90f59d103c973384cf"
   name = "gopkg.in/gomail.v2"
   packages = ["."]
+  pruneopts = "UT"
   revision = "81ebce5c23dfd25c6c67194b37d3dd3f338c98b1"
 
 [[projects]]
+  digest = "1:5abd6a22805b1919f6a6bca0ae58b13cef1f3412812f38569978f43ef02743d4"
   name = "gopkg.in/ini.v1"
   packages = ["."]
+  pruneopts = "UT"
   revision = "5cf292cae48347c2490ac1a58fe36735fb78df7e"
   version = "v1.38.2"
 
 [[projects]]
   branch = "v2"
+  digest = "1:e8c48aa61ea272e211858e52979ad4d114c60bfe6900d12431ac697482100b0a"
   name = "gopkg.in/robfig/cron.v2"
   packages = ["."]
+  pruneopts = "UT"
   revision = "be2e0b0deed5a68ffee390b4583a13aff8321535"
 
 [[projects]]
   branch = "v2"
+  digest = "1:927bc5076aef9916f1920f2a07e3723e9da1dcd52baa84d29893a3f417c867b4"
   name = "gopkg.in/urfave/cli.v2"
   packages = ["."]
+  pruneopts = "UT"
   revision = "d3ae77c26ac8db90639677e4831a728d33c36111"
 
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "4e525cb1c79b0b5b0b40aa243c2c427ccd947debc0bcc2f66fb9065739c7c9ca"
+  input-imports = [
+    "github.com/coreos/go-semver/semver",
+    "github.com/denisenkom/go-mssqldb",
+    "github.com/gobuffalo/packr",
+    "github.com/kardianos/minwinsvc",
+    "github.com/pkg/errors",
+    "github.com/rs/zerolog",
+    "github.com/rs/zerolog/log",
+    "github.com/stretchr/testify/assert",
+    "github.com/stretchr/testify/mock",
+    "gopkg.in/gomail.v2",
+    "gopkg.in/ini.v1",
+    "gopkg.in/robfig/cron.v2",
+    "gopkg.in/urfave/cli.v2",
+  ]
   solver-name = "gps-cdcl"
   solver-version = 1
