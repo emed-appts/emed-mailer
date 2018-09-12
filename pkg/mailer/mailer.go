@@ -5,6 +5,8 @@ import (
 	"sync/atomic"
 	"time"
 
+	"github.com/emed-appts/emedappts-mailer/pkg/job"
+
 	"github.com/rs/zerolog/log"
 	"gopkg.in/gomail.v2"
 )
@@ -16,12 +18,6 @@ var (
 	running uint32
 )
 
-// Mailer interface
-type Mailer interface {
-	Run(<-chan interface{}) error
-	SendMessage(string, string) error
-}
-
 // TextMailer implements Mailer interface
 // it runs a daemon waiting for text messages to send to a predefined address
 type TextMailer struct {
@@ -31,7 +27,7 @@ type TextMailer struct {
 }
 
 // New returns a Mailer implementation
-func New(cfg Config) Mailer {
+func New(cfg Config) job.Mailer {
 	return &TextMailer{
 		cfg: cfg,
 	}

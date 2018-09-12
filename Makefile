@@ -6,14 +6,16 @@ ifeq ($(OS), Windows_NT)
 	EXECUTABLE := $(NAME).exe
 	HAS_RETOOL := $(shell where retool ;)
 	HAS_PACKR := $(shell where packr ;)
+	HAS_MOCKERY := $(shell where mockery ;)
 else
 	EXECUTABLE := $(NAME)
 	HAS_RETOOL := $(shell command -v retool ;)
 	HAS_PACKR := $(shell command -v packr ;)
+	HAS_MOCKERY := $(shell command -v mockery ;)
 endif
 
 PACKAGES ?= $(shell go list ./... | grep -v /vendor/ | grep -v /_tools/)
-SOURCES ?= $(shell find . -name "*.go" -type f -not -path "./vendor/*" -not -path "./_tools/*")
+SOURCES ?= $(shell find . -name "*.go" -type f -not -path "./vendor/*" -not -path "./_tools/*" -not -path "./test/*" -not -name "mock_*")
 
 TAGS ?=
 
@@ -135,7 +137,7 @@ release-check:
 publish: release
 
 .PHONY: install-tools
-install-tools: retool packr
+install-tools: retool packr mockery
 
 .PHONY: retool
 retool:
@@ -149,4 +151,10 @@ endif
 packr:
 ifndef HAS_PACKR
     go get -u github.com/gobuffalo/packr/...
+endif
+
+.PHONY: mockery
+mockery:
+ifndef HAS_MOCKERY
+    go get -u github.com/vektra/mockery/...
 endif
