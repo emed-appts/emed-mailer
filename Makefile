@@ -5,9 +5,11 @@ DIST := dist
 ifeq ($(OS), Windows_NT)
 	EXECUTABLE := $(NAME).exe
 	HAS_RETOOL := $(shell where retool ;)
+	HAS_PACKR := $(shell where packr ;)
 else
 	EXECUTABLE := $(NAME)
 	HAS_RETOOL := $(shell command -v retool ;)
+	HAS_PACKR := $(shell command -v packr ;)
 endif
 
 PACKAGES ?= $(shell go list ./... | grep -v /vendor/ | grep -v /_tools/)
@@ -132,6 +134,9 @@ release-check:
 .PHONY: publish
 publish: release
 
+.PHONY: install-tools
+install-tools: retool packr
+
 .PHONY: retool
 retool:
 ifndef HAS_RETOOL
@@ -139,3 +144,9 @@ ifndef HAS_RETOOL
 endif
 	retool sync
 	retool build
+
+.PHONY: packr
+packr:
+ifndef HAS_PACKR
+    go get -u github.com/gobuffalo/packr/...
+endif

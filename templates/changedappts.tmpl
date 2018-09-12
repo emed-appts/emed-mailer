@@ -1,0 +1,84 @@
+<!doctype html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Updated Appointments Notification Email</title>
+    <style type="text/css">
+        @font-face {
+          font-family: 'Roboto';
+          font-style: normal;
+          font-weight: 400;
+          src: local('Roboto'), local('Roboto-Regular'), url(https://fonts.gstatic.com/s/roboto/v18/KFOmCnqEu92Fr1Mu4mxKKTU1Kg.woff2) format('woff2');
+          unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+        }
+
+        body {
+            font-family: "Roboto", Arial, Helvetica, sans-serif;
+        }
+        table {
+            border-spacing: 0 .25em;
+        }
+        tbody tr:nth-child(2n) {
+            background-color: #e8e8e8;
+        }
+        tbody:hover tr {
+            background-color: transparent;
+        }
+        tbody:hover tr:hover {
+            background-color: #e8e8e8;
+        }
+        table td {
+            padding: .3em .5em;
+        }
+        table .action + td {
+            padding-left: 1em;
+        }
+        .action {
+            text-align: center;
+        }
+        .action.new {
+            background-color: #acdda8;
+        }
+        .action.cancel {
+            background-color: #f25454;
+        }
+    </style>
+</head>
+<body>
+<p>eTermin Buchungen/Storni: {{ len .ChangedAppts }}</p>
+
+{{if len .ChangedAppts}}
+    <table>
+        <thead>
+            <tr>
+                <td class="action"></td>
+                <td>Uhrzeit</td>
+                <td align="right">Patienten ID</td>
+                <td>Patient</td>
+                <td>Termin</td>
+            </tr>
+        </thead>
+        <tbody>
+        {{range .ChangedAppts}}
+            <tr>
+                {{if .IsBooking}}
+                    <td class="action new">RESERVIERT</td>
+                {{else}}
+                    <td class="action cancel">STORNO</td>
+                {{end}}
+                </td>
+                <td>{{ .Time | DateFmt }}</td>
+                <td align="right">{{ .PatientID }}</td>
+                <td>{{ .PatientName }}</td>
+                <td>{{ .Appointment | DateFmt }}</td>
+            </tr>
+        {{end}}
+        </tbody>
+    </table>
+{{end}}
+
+<p>Seit: {{ .LastRun | DateFmt }}</p>
+
+</body>
+</html>

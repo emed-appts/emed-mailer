@@ -8,6 +8,12 @@
   version = "v0.2.0"
 
 [[projects]]
+  name = "github.com/gobuffalo/packr"
+  packages = ["."]
+  revision = "6c8156ee36301dd007342e79d81c99e7a7834337"
+  version = "v1.13.5"
+
+[[projects]]
   branch = "master"
   name = "github.com/kardianos/minwinsvc"
   packages = ["."]
@@ -72,6 +78,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "751acb8c71a17d8ecbd2a42e5d0edd9ddf6d7348d9e87238c01e52b45d892ce7"
+  inputs-digest = "a4d2dd7e12a9b58b0458752360ed683d7f966572dd3e462370737ccadbfa0b1e"
   solver-name = "gps-cdcl"
   solver-version = 1

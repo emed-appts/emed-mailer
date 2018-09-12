@@ -9,6 +9,8 @@
 !/conf/app.ini.sample
 /data
 
+*-packr.go
+
 /docs/public
 /tmp
 
