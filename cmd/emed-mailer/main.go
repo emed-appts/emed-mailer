@@ -24,10 +24,10 @@ import (
 
 func main() {
 	app := &cli.App{
-		Name:        "emedappt-mailer",
+		Name:        "emedappt-emed-mailer",
 		Version:     version.Version.String(),
 		Usage:       "eMedical Appointments Mailer Service",
-		Description: "Runs the mailer service, sending notifications about booked/cancelled appointments",
+		Description: "Runs the emed-mailer service, sending notifications about booked/cancelled appointments",
 		Compiled:    time.Now(),
 
 		Authors: []*cli.Author{
@@ -61,7 +61,7 @@ func main() {
 			}
 
 			// open logfile
-			logFile, err := os.OpenFile(path.Join(config.General.Root, "mailer.log"), os.O_CREATE|os.O_APPEND|os.O_RDWR, 0666)
+			logFile, err := os.OpenFile(path.Join(config.General.Root, "emed-mailer.log"), os.O_CREATE|os.O_APPEND|os.O_RDWR, 0666)
 			if err != nil {
 				log.Fatal().
 					Msgf("%+v\n", errors.Wrap(err, "could not open log file"))
@@ -113,7 +113,7 @@ func main() {
 			// instantiate collector
 			c := collector.New(db)
 
-			// instantiate mailer
+			// instantiate emed-mailer
 			m := mailer.New(mailer.Config{
 				Server:   config.Mail.Server,
 				Port:     config.Mail.Port,
@@ -124,7 +124,7 @@ func main() {
 				To:      config.Mail.To,
 				Subject: config.Mail.Subject,
 			})
-			// run mailer daemon
+			// run emed-mailer daemon
 			m.Run(stop)
 
 			// instantiate job
