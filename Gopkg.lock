@@ -2,6 +2,12 @@
 
 
 [[projects]]
+  name = "cloud.google.com/go"
+  packages = ["civil"]
+  revision = "c728a003b238b26cef9ab6753a5dc424b331c3ad"
+  version = "v0.27.0"
+
+[[projects]]
   name = "github.com/coreos/go-semver"
   packages = ["semver"]
   revision = "8ab6407b697782a06568d4b7f1db25550ec2e4c6"
@@ -12,6 +18,15 @@
   packages = ["spew"]
   revision = "8991bc29aa16c548c550c7ff78260e27b9ab7c73"
   version = "v1.1.1"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/denisenkom/go-mssqldb"
+  packages = [
+    ".",
+    "internal/cp"
+  ]
+  revision = "1eb28afdf9b6e56cf673badd47545f844fe81103"
 
 [[projects]]
   name = "github.com/gobuffalo/packr"
@@ -65,6 +80,12 @@
 
 [[projects]]
   branch = "master"
+  name = "golang.org/x/crypto"
+  packages = ["md4"]
+  revision = "0e37d006457bf46f9e6692014ba72ef82c33022c"
+
+[[projects]]
+  branch = "master"
   name = "golang.org/x/sys"
   packages = [
     "windows",
@@ -105,6 +126,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "471539eb7c03565bebd27ef7c47c477d5633f22e4a257c823c79fb6300919353"
+  inputs-digest = "4e525cb1c79b0b5b0b40aa243c2c427ccd947debc0bcc2f66fb9065739c7c9ca"
   solver-name = "gps-cdcl"
   solver-version = 1
