@@ -9,12 +9,16 @@ import (
 	"syscall"
 	"time"
 
+	"github.com/emed-appts/emed-mailer/pkg/collector"
 	"github.com/emed-appts/emed-mailer/pkg/config"
+	"github.com/emed-appts/emed-mailer/pkg/job"
+	"github.com/emed-appts/emed-mailer/pkg/mailer"
 	"github.com/emed-appts/emed-mailer/pkg/version"
 
 	"github.com/pkg/errors"
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
+	"gopkg.in/robfig/cron.v2"
 	"gopkg.in/urfave/cli.v2"
 )
 
@@ -46,7 +50,7 @@ func main() {
 			},
 		},
 
-		Action: func(c *cli.Context) error {
+		Action: func(_ *cli.Context) error {
 			// load config
 			err := config.Load()
 			if err != nil {
@@ -84,17 +88,58 @@ func main() {
 				log.Fatal().
 					Msgf("%+v\n", errors.Wrap(err, "could not parse log level"))
 
-				return  err
+				return err
 			}
 			zerolog.SetGlobalLevel(logLvl)
 
-			stop := make(chan os.Signal, 1)
+			stop := make(chan struct{}, 1)
 
-			// todo run action
+			// open database connection
+			db, err := collector.OpenSQL(collector.Config{
+				Server:   config.DB.Server,
+				Port:     config.DB.Port,
+				User:     config.DB.User,
+				Password: config.DB.Password,
+				Database: config.DB.Database,
+			})
+			if err != nil {
+				log.Fatal().
+					Msgf("%+v\n", errors.Wrap(err, "could not connect to db"))
 
-			signal.Notify(stop, syscall.SIGINT, syscall.SIGTERM)
-			<-stop
+				return err
+			}
+			defer db.Close()
 
+			// instantiate collector
+			c := collector.New(db)
+
+			// instantiate mailer
+			m := mailer.New(mailer.Config{
+				Server:   config.Mail.Server,
+				Port:     config.Mail.Port,
+				User:     config.Mail.User,
+				Password: config.Mail.Password,
+
+				From:    config.Mail.From,
+				To:      config.Mail.To,
+				Subject: config.Mail.Subject,
+			})
+			// run mailer daemon
+			m.Run(stop)
+
+			// instantiate job
+			changedApptsJob := job.New(c, m)
+
+			cj := cron.New()
+			cj.AddFunc(config.General.Schedule, changedApptsJob.Run)
+			cj.Start()
+
+			sigs := make(chan os.Signal, 1)
+			signal.Notify(sigs, syscall.SIGINT, syscall.SIGTERM)
+			<-sigs
+
+			cj.Stop()
+			close(sigs)
 			close(stop)
 
 			return nil
