@@ -5,7 +5,7 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/emed-appts/emedappts-mailer/pkg/job"
+	"github.com/emed-appts/emed-mailer/pkg/job"
 
 	"github.com/rs/zerolog/log"
 	"gopkg.in/gomail.v2"

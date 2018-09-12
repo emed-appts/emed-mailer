@@ -6,7 +6,7 @@ import (
 	"path"
 	"testing"
 
-	"github.com/emed-appts/emedappts-mailer/pkg/config"
+	"github.com/emed-appts/emed-mailer/pkg/config"
 )
 
 func fatalTestError(fmtStr string, args ...interface{}) {

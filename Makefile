@@ -1,4 +1,4 @@
-NAME := emedappts-mailer
+NAME := emed-mailer
 IMPORT := github.com/emed-appts/$(NAME)
 DIST := dist
 

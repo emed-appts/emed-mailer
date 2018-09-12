@@ -5,7 +5,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/emed-appts/emedappts-mailer/pkg/job"
+	"github.com/emed-appts/emed-mailer/pkg/job"
 
 	"github.com/pkg/errors"
 )

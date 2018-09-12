@@ -9,8 +9,8 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/emed-appts/emedappts-mailer/pkg/config"
-	"github.com/emed-appts/emedappts-mailer/pkg/version"
+	"github.com/emed-appts/emed-mailer/pkg/config"
+	"github.com/emed-appts/emed-mailer/pkg/version"
 
 	"github.com/pkg/errors"
 	"github.com/rs/zerolog"

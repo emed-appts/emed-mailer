@@ -4,7 +4,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/emed-appts/emedappts-mailer/test"
+	"github.com/emed-appts/emed-mailer/test"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
