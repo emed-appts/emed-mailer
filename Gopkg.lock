@@ -2,97 +2,76 @@
 
 
 [[projects]]
-  digest = "1:0ef770954bca104ee99b3b6b7f9b240605ac03517d9f98cbc1893daa03f3c038"
   name = "github.com/coreos/go-semver"
   packages = ["semver"]
-  pruneopts = "UT"
   revision = "8ab6407b697782a06568d4b7f1db25550ec2e4c6"
   version = "v0.2.0"
 
 [[projects]]
   branch = "master"
-  digest = "1:c411b6e8466c7934d87d3667796b13631bcad0f66377ce316279b55f4658b5f4"
   name = "github.com/kardianos/minwinsvc"
   packages = ["."]
-  pruneopts = "UT"
   revision = "cad6b2b879b0970e4245a20ebf1a81a756e2bb70"
 
 [[projects]]
-  digest = "1:40e195917a951a8bf867cd05de2a46aaf1806c50cf92eebf4c16f78cd196f747"
   name = "github.com/pkg/errors"
   packages = ["."]
-  pruneopts = "UT"
   revision = "645ef00459ed84a119197bfb8d8205042c6df63d"
   version = "v0.8.0"
 
 [[projects]]
-  digest = "1:d823cf8863c515f10fe9084d9688e8cf01084fd83dd11bcb67e13162c30b3a4a"
   name = "github.com/rs/zerolog"
   packages = [
     ".",
     "internal/cbor",
     "internal/json",
-    "log",
+    "log"
   ]
-  pruneopts = "UT"
   revision = "77db4b4f350e31be66a57c332acb7721cf9ff9bb"
   version = "v1.8.0"
 
 [[projects]]
   branch = "master"
-  digest = "1:d439e09156f0daf3df9d4f509ad09bd5cab75ecd5a1c837a84551dcace5fc10f"
   name = "golang.org/x/sys"
   packages = [
     "windows",
-    "windows/svc",
+    "windows/svc"
   ]
-  pruneopts = "UT"
   revision = "ebe1bf3edb3325c393447059974de898d5133eb8"
 
 [[projects]]
   branch = "v3"
-  digest = "1:7388652e2215a3f45d341d58766ed58317971030eb1cbd75f005f96ace8e9196"
   name = "gopkg.in/alexcesaro/quotedprintable.v3"
   packages = ["."]
-  pruneopts = "UT"
   revision = "2caba252f4dc53eaf6b553000885530023f54623"
 
 [[projects]]
   branch = "v2"
-  digest = "1:e096ada745e034a059752c202717baee0379b69db9473a90f59d103c973384cf"
   name = "gopkg.in/gomail.v2"
   packages = ["."]
-  pruneopts = "UT"
   revision = "81ebce5c23dfd25c6c67194b37d3dd3f338c98b1"
 
 [[projects]]
-  digest = "1:5abd6a22805b1919f6a6bca0ae58b13cef1f3412812f38569978f43ef02743d4"
   name = "gopkg.in/ini.v1"
   packages = ["."]
-  pruneopts = "UT"
   revision = "5cf292cae48347c2490ac1a58fe36735fb78df7e"
   version = "v1.38.2"
 
 [[projects]]
   branch = "v2"
-  digest = "1:927bc5076aef9916f1920f2a07e3723e9da1dcd52baa84d29893a3f417c867b4"
+  name = "gopkg.in/robfig/cron.v2"
+  packages = ["."]
+  revision = "be2e0b0deed5a68ffee390b4583a13aff8321535"
+
+[[projects]]
+  branch = "v2"
   name = "gopkg.in/urfave/cli.v2"
   packages = ["."]
-  pruneopts = "UT"
   revision = "d3ae77c26ac8db90639677e4831a728d33c36111"
 
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  input-imports = [
-    "github.com/coreos/go-semver/semver",
-    "github.com/kardianos/minwinsvc",
-    "github.com/pkg/errors",
-    "github.com/rs/zerolog",
-    "github.com/rs/zerolog/log",
-    "gopkg.in/gomail.v2",
-    "gopkg.in/ini.v1",
-    "gopkg.in/urfave/cli.v2",
-  ]
+  inputs-digest = "751acb8c71a17d8ecbd2a42e5d0edd9ddf6d7348d9e87238c01e52b45d892ce7"
   solver-name = "gps-cdcl"
   solver-version = 1

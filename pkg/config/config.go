@@ -7,10 +7,12 @@ import (
 	"path/filepath"
 	"runtime"
 	"strings"
+	"time"
 
 	_ "github.com/kardianos/minwinsvc" // import minwinsvc for windows services
 	"github.com/pkg/errors"
 	"gopkg.in/ini.v1"
+	"gopkg.in/robfig/cron.v2"
 )
 
 var (
@@ -20,12 +22,15 @@ var (
 	// General config
 	General = &general{}
 	// Mail config
-	Mail    = &mail{}
+	Mail = &mail{}
+	// DB config
+	DB = &db{}
 	// Log config
-	Log     = &log{}
+	Log = &log{}
 
+	// AppWorkPath of binary
+	AppWorkPath string
 	isWindows   bool
-	appWorkPath string
 )
 
 // general defines the general configuration.
@@ -34,7 +39,7 @@ type general struct {
 	Schedule string `ini:"SCHEDULE"`
 }
 
-// mail defines the mailor configuration.
+// mail defines the mailer configuration.
 type mail struct {
 	Server   string `ini:"SERVER"`
 	Port     int    `ini:"PORT"`
@@ -44,6 +49,16 @@ type mail struct {
 	From    string `ini:"FROM"`
 	To      string `ini:"TO"`
 	Subject string `ini:"SUBJECT"`
+}
+
+// db defines the database configuration.
+type db struct {
+	Server   string `ini:"SERVER"`
+	Port     int    `ini:"PORT"`
+	User     string `ini:"USER"`
+	Password string `ini:"PASSWORD"`
+
+	Database string `ini:"DATABASE"`
 }
 
 // log defines the logging configuration.
@@ -63,10 +78,10 @@ func Load() error {
 		return errors.Wrap(err, "could not get application path")
 	}
 
-	appWorkPath = getWorkPath(appPath)
+	AppWorkPath = getWorkPath(appPath)
 
 	if !filepath.IsAbs(Path) {
-		Path = path.Join(appWorkPath, Path)
+		Path = path.Join(AppWorkPath, Path)
 	}
 
 	config, err := ini.Load(Path)
@@ -79,14 +94,30 @@ func Load() error {
 	}
 
 	if !filepath.IsAbs(General.Root) {
-		General.Root = path.Join(appWorkPath, General.Root)
+		General.Root = path.Join(AppWorkPath, General.Root)
 	}
 	if err := os.MkdirAll(General.Root, os.ModePerm); err != nil {
 		return errors.Wrap(err, "could not create folders of root path")
 	}
 
+	schedule, err := cron.Parse(General.Schedule)
+	if err != nil {
+		return errors.Wrap(err, "could not parse cron expression")
+	}
+	// calculate interval
+	nextExecutionTime := schedule.Next(time.Now())
+	interval := schedule.Next(nextExecutionTime).Sub(nextExecutionTime)
+	// check if interval is longer than 15 minutes
+	if interval.Minutes() < 15 {
+		return errors.New("schedule interval shorter than 15 minutes")
+	}
+
 	if err = config.Section("mail").MapTo(Mail); err != nil {
 		return errors.Wrap(err, "could not map mail section")
+	}
+
+	if err = config.Section("db").MapTo(DB); err != nil {
+		return errors.Wrap(err, "could not map db section")
 	}
 
 	if err = config.Section("log").MapTo(Log); err != nil {
