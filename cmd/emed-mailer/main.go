@@ -3,6 +3,7 @@
 package main
 
 import (
+	"fmt"
 	"os"
 	"os/signal"
 	"path"
@@ -24,7 +25,7 @@ import (
 
 func main() {
 	app := &cli.App{
-		Name:        "emedappt-emed-mailer",
+		Name:        "emed-mailer",
 		Version:     version.Version.String(),
 		Usage:       "eMedical Appointments Mailer Service",
 		Description: "Runs the emed-mailer service, sending notifications about booked/cancelled appointments",
@@ -50,23 +51,23 @@ func main() {
 			},
 		},
 
-		Action: func(_ *cli.Context) error {
+		Action: func(ctx *cli.Context) error {
 			// load config
 			err := config.Load()
 			if err != nil {
-				log.Fatal().
-					Msgf("%+v\n", errors.Wrap(err, "could not load config"))
+				fmt.Fprintf(ctx.App.Writer, "\nCould not load configuration file.\n%v\n\n", errors.Cause(err))
 
-				return err
+				cli.ShowAppHelp(ctx)
+				return cli.Exit("", 128)
 			}
 
 			// open logfile
 			logFile, err := os.OpenFile(path.Join(config.General.Root, "emed-mailer.log"), os.O_CREATE|os.O_APPEND|os.O_RDWR, 0666)
 			if err != nil {
-				log.Fatal().
-					Msgf("%+v\n", errors.Wrap(err, "could not open log file"))
+				fmt.Fprintf(ctx.App.Writer, "\nCould not open log file.\n%v\n\n", errors.Cause(err))
 
-				return err
+				cli.ShowAppHelp(ctx)
+				return cli.Exit("", 128)
 			}
 			defer logFile.Close()
 
@@ -85,10 +86,10 @@ func main() {
 			// set configured log level
 			logLvl, err := zerolog.ParseLevel(config.Log.Level)
 			if err != nil {
-				log.Fatal().
-					Msgf("%+v\n", errors.Wrap(err, "could not parse log level"))
+				fmt.Fprintf(ctx.App.Writer, "\nCould not parse Log Level.\n%v\n\n", errors.Cause(err))
 
-				return err
+				cli.ShowAppHelp(ctx)
+				return cli.Exit("", 128)
 			}
 			zerolog.SetGlobalLevel(logLvl)
 

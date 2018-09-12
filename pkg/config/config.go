@@ -1,6 +1,7 @@
 package config
 
 import (
+	"github.com/rs/zerolog"
 	"os"
 	"os/exec"
 	"path"
@@ -122,6 +123,10 @@ func Load() error {
 
 	if err = config.Section("log").MapTo(Log); err != nil {
 		return errors.Wrap(err, "could not map log section")
+	}
+
+	if _, err := zerolog.ParseLevel(Log.Level); err != nil {
+		return errors.Wrap(err, "could not parse log level")
 	}
 
 	return nil
