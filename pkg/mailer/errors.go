@@ -6,6 +6,8 @@ type notRunning interface {
 	NotRunning() bool
 }
 
+// IsNotRunning checks if the error cause is a notRunning error
+// returned if someone tries to send a message but mailer daemon is not running
 func IsNotRunning(err error) bool {
 	nr, ok := errors.Cause(err).(notRunning)
 	return ok && nr.NotRunning()
@@ -29,6 +31,8 @@ type alreadyRunning interface {
 	AlreadyRunning() bool
 }
 
+// IsAlreadyRunning checks if the error cause is an alreadyRunning error
+// returned if someone tries to start multiple daemons
 func IsAlreadyRunning(err error) bool {
 	ar, ok := errors.Cause(err).(alreadyRunning)
 	return ok && ar.AlreadyRunning()

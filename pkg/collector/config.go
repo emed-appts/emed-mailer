@@ -1,6 +1,7 @@
 package collector
 
-type Config struct {
+// DBConfig struct encapsulate all settings for dbCollector
+type DBConfig struct {
 	Server   string
 	Port     int
 	User     string

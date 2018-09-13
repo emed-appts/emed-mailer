@@ -19,15 +19,17 @@ type logEntry struct {
 	txt     string
 }
 
-type DBCollector struct {
+type dbCollector struct {
 	db *sql.DB
 }
 
+// New creates a collector instance
 func New(db *sql.DB) job.Collector {
-	return &DBCollector{db}
+	return &dbCollector{db}
 }
 
-func (collector *DBCollector) CollectChangedAppts(lastRun time.Time) ([]*job.ApptChange, error) {
+// CollectChangedAppts gathers changed appointments since `lastRun`
+func (collector *dbCollector) CollectChangedAppts(lastRun time.Time) ([]*job.ApptChange, error) {
 	// fetch all changed appointments since `lastRun`
 	rows, err := collector.db.Query("SELECT datlog, action, datum, zeit, pid, txt FROM pds6_kallog WHERE usc = 'eT' AND datlog > @p1 ORDER BY datlog ASC", lastRun)
 	if err != nil {

@@ -19,6 +19,7 @@ var (
 	}
 )
 
+// Execute executes the named template
 func Execute(wr io.Writer, name string, data interface{}) error {
 	msgTemplate, err := box.MustString(name)
 	if err != nil {

@@ -9,7 +9,8 @@ import (
 	"github.com/pkg/errors"
 )
 
-func OpenSQL(cfg Config) (*sql.DB, error) {
+// OpenSQL opens a mssql database connection by given config
+func OpenSQL(cfg DBConfig) (*sql.DB, error) {
 	query := url.Values{}
 	query.Add("database", cfg.Database)
 	query.Add("encrypt", "disable")

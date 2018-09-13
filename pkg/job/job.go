@@ -15,6 +15,7 @@ type Mailer interface {
 	SendMessage(string, string) error
 }
 
+// ApptChange struct
 type ApptChange struct {
 	Time        time.Time
 	Appointment time.Time
@@ -23,11 +24,13 @@ type ApptChange struct {
 	IsBooking   bool
 }
 
+// Collector interface
 type Collector interface {
 	// collects latest changed appointments ordered by time of change
 	CollectChangedAppts(time.Time) ([]*ApptChange, error)
 }
 
+// Job interface
 type Job interface {
 	Run()
 }
@@ -38,6 +41,7 @@ type changedApptsJob struct {
 	lastRun   time.Time
 }
 
+// New creates a Job instance
 func New(collector Collector, mailer Mailer) Job {
 	return &changedApptsJob{
 		collector: collector,
@@ -46,6 +50,7 @@ func New(collector Collector, mailer Mailer) Job {
 	}
 }
 
+// Run executes the job once
 func (job *changedApptsJob) Run() {
 	// store execution time
 	run := time.Now()

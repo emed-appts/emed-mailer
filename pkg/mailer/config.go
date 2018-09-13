@@ -1,5 +1,6 @@
 package mailer
 
+// Config struct encapsulate all settings for TextMailer
 type Config struct {
 	Server   string
 	Port     int

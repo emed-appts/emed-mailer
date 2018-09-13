@@ -96,7 +96,7 @@ func main() {
 			stop := make(chan struct{}, 1)
 
 			// open database connection
-			db, err := collector.OpenSQL(collector.Config{
+			db, err := collector.OpenSQL(collector.DBConfig{
 				Server:   config.DB.Server,
 				Port:     config.DB.Port,
 				User:     config.DB.User,
