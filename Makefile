@@ -150,11 +150,11 @@ endif
 .PHONY: packr
 packr:
 ifndef HAS_PACKR
-    go get -u github.com/gobuffalo/packr/...
+	go get -u github.com/gobuffalo/packr/...
 endif
 
 .PHONY: mockery
 mockery:
 ifndef HAS_MOCKERY
-    go get -u github.com/vektra/mockery/...
+	go get -u github.com/vektra/mockery/...
 endif
