@@ -5,6 +5,7 @@ import (
 	"strings"
 	"time"
 
+	"github.com/emed-appts/emed-mailer/pkg/collector/tzinfo"
 	"github.com/emed-appts/emed-mailer/pkg/job"
 
 	"github.com/pkg/errors"
@@ -48,15 +49,15 @@ func (collector *dbCollector) CollectChangedAppts(lastRun time.Time) ([]*job.App
 		// txt contains <name>, <anything>
 		name := strings.SplitN(entry.txt, ",", 2)[0]
 
-		// string -> time.Duration
-		dur, err := parseTimeDuration(entry.time)
+		// string -> time.Time
+		t, err := parseTime(entry.time)
 		if err != nil {
 			return nil, errors.WithStack(err)
 		}
 
 		changedAppts = append(changedAppts, &job.ApptChange{
 			Time:        entry.logTime,
-			Appointment: entry.date.Add(dur),
+			Appointment: entry.date.Add(timeDuration(t)),
 			PatientID:   entry.pid,
 			PatientName: name,
 			IsBooking:   entry.action == "eFill",
@@ -70,17 +71,17 @@ func (collector *dbCollector) CollectChangedAppts(lastRun time.Time) ([]*job.App
 	return changedAppts, nil
 }
 
-func parseTimeDuration(value string) (time.Duration, error) {
-	loc, err := time.LoadLocation("Europe/Vienna")
+// parseTime parses Time expected to be in Timezone Europe/Vienna
+func parseTime(value string) (time.Time, error) {
+	loc, err := tzinfo.LoadLocation("Europe/Vienna")
 	if err != nil {
-		return 0, errors.Wrap(err, "could not load location \"Europe/Vienna\"")
+		return time.Time{}, errors.Wrap(err, "could not load location \"Europe/Vienna\"")
 	}
 	t, err := time.ParseInLocation("15:04", value, loc)
-	if err != nil {
-		return 0, errors.Wrap(err, "could not parse time")
-	}
 
-	dur := time.Hour*time.Duration(t.Hour()) + time.Minute*time.Duration(t.Minute())
+	return t, errors.Wrap(err, "could not parse time")
+}
 
-	return dur, nil
+func timeDuration(t time.Time) time.Duration {
+	return time.Hour*time.Duration(t.Hour()) + time.Minute*time.Duration(t.Minute())
 }

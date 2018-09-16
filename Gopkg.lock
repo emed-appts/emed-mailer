@@ -2,6 +2,14 @@
 
 
 [[projects]]
+  branch = "master"
+  digest = "1:1ad3c944921225881540eede70cbb870ecf415ed130290c273ec05733b9b5ce1"
+  name = "4d63.com/tz"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "73a1e3d39b09378a51afc6e7d923ce9a6ca7f38c"
+
+[[projects]]
   digest = "1:b62a3c5b37db602bf1158e921da1a762315a4c37855fd418a14498aa87a342d5"
   name = "cloud.google.com/go"
   packages = ["civil"]
@@ -163,6 +171,7 @@
   analyzer-name = "dep"
   analyzer-version = 1
   input-imports = [
+    "4d63.com/tz",
     "github.com/coreos/go-semver/semver",
     "github.com/denisenkom/go-mssqldb",
     "github.com/gobuffalo/packr",
