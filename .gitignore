@@ -1,21 +1,21 @@
 # Mailer related
 
-/_tools
-/vendor
-/dist
-/bin
+_tools
+vendor
+dist
+bin
 
-/conf/*
-!/conf/app.ini.sample
-/data
+conf/*
+!conf/app.ini.sample
+data
 
 *-packr.go
 
-/docs/public
-/tmp
+docs/public
+tmp
 
 # binary
-/emedappts-mailer
+emed-mailer
 
 # Created by https://www.gitignore.io/api/go,linux,macos,windows,intellij,visualstudio
 
