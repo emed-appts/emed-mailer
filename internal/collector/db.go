@@ -23,6 +23,13 @@ func OpenSQL(cfg DBConfig) (*sql.DB, error) {
 	}
 
 	db, err := sql.Open("sqlserver", u.String())
+	if err != nil {
+		return nil, errors.Wrap(err,"could not open db connection pool")
+	}
 
-	return db, errors.Wrap(err, "could not connect to sqlserver")
+	if err := db.Ping(); err != nil {
+		db.Close()
+		return nil, errors.Wrap(err, "could not connect to sqlserver")
+	}
+	return db, nil
 }
