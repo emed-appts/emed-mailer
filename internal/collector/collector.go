@@ -5,8 +5,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/emed-appts/emed-mailer/pkg/collector/tzinfo"
-	"github.com/emed-appts/emed-mailer/pkg/job"
+	"github.com/emed-appts/emed-mailer/internal/collector/tzinfo"
+	"github.com/emed-appts/emed-mailer/internal/job"
 
 	"github.com/pkg/errors"
 )

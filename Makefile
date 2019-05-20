@@ -39,7 +39,7 @@ ifndef DATE
 	DATE := $(shell date -u '+%Y%m%d')
 endif
 
-LDFLAGS += -s -w -X "$(IMPORT)/pkg/version.VersionString=$(VERSION)" -X "$(IMPORT)/pkg/version.VersionDev=$(SHA)" -X "$(IMPORT)/pkg/version.VersionDate=$(DATE)"
+LDFLAGS += -s -w -X "$(IMPORT)/internal/version.VersionString=$(VERSION)" -X "$(IMPORT)/internal/version.VersionDev=$(SHA)" -X "$(IMPORT)/internal/version.VersionDate=$(DATE)"
 
 .PHONY: all
 all: build

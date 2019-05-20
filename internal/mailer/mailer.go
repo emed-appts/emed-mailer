@@ -5,8 +5,6 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/emed-appts/emed-mailer/pkg/job"
-
 	"github.com/rs/zerolog/log"
 	"gopkg.in/gomail.v2"
 )
@@ -27,7 +25,7 @@ type TextMailer struct {
 }
 
 // New returns a Mailer implementation
-func New(cfg Config) job.Mailer {
+func New(cfg Config) *TextMailer {
 	return &TextMailer{
 		cfg: cfg,
 	}

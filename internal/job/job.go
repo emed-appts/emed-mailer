@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"time"
 
-	"github.com/emed-appts/emed-mailer/pkg/template"
+	"github.com/emed-appts/emed-mailer/internal/template"
 
 	"github.com/rs/zerolog/log"
 )

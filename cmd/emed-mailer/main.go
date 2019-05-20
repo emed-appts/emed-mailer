@@ -10,11 +10,11 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/emed-appts/emed-mailer/pkg/collector"
-	"github.com/emed-appts/emed-mailer/pkg/config"
-	"github.com/emed-appts/emed-mailer/pkg/job"
-	"github.com/emed-appts/emed-mailer/pkg/mailer"
-	"github.com/emed-appts/emed-mailer/pkg/version"
+	"github.com/emed-appts/emed-mailer/internal/collector"
+	"github.com/emed-appts/emed-mailer/internal/config"
+	"github.com/emed-appts/emed-mailer/internal/job"
+	"github.com/emed-appts/emed-mailer/internal/mailer"
+	"github.com/emed-appts/emed-mailer/internal/version"
 
 	"github.com/pkg/errors"
 	"github.com/rs/zerolog"
