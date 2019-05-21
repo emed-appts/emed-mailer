@@ -1,5 +1,3 @@
-//go:generate retool do packr
-
 package main
 
 import (

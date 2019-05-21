@@ -1,3 +1,5 @@
+//go:generate retool do packr
+
 package template
 
 import (

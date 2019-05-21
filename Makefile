@@ -55,6 +55,7 @@ sync:
 .PHONY: clean
 clean:
 	go clean -i ./...
+	retool do packr clean
 	rm -rf bin/ $(DIST)/binaries $(DIST)/release
 
 .PHONY: fmt
@@ -150,7 +151,7 @@ endif
 .PHONY: packr
 packr:
 ifndef HAS_PACKR
-	go get -u github.com/gobuffalo/packr/...
+	go get -u github.com/gobuffalo/packr/packr
 endif
 
 .PHONY: mockery
