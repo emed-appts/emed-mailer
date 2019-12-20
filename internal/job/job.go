@@ -42,11 +42,11 @@ type changedApptsJob struct {
 }
 
 // New creates a Job instance
-func New(collector Collector, mailer Mailer) Job {
+func New(collector Collector, mailer Mailer, lastRun time.Time) Job {
 	return &changedApptsJob{
 		collector: collector,
 		mailer:    mailer,
-		lastRun:   time.Now(),
+		lastRun:   lastRun,
 	}
 }
 

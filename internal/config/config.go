@@ -37,7 +37,9 @@ var (
 // general defines the general configuration.
 type general struct {
 	Root     string `ini:"ROOT"`
-	Schedule string `ini:"SCHEDULE"`
+	CronExpression string `ini:"SCHEDULE"`
+	Schedule cron.Schedule `ini:"-"`
+	Interval time.Duration `ini:"-"`
 }
 
 // mail defines the mailer configuration.
@@ -101,15 +103,16 @@ func Load() error {
 		return errors.Wrap(err, "could not create folders of root path")
 	}
 
-	schedule, err := cron.Parse(General.Schedule)
+	General.Schedule, err = cron.Parse(General.CronExpression)
 	if err != nil {
 		return errors.Wrap(err, "could not parse cron expression")
 	}
 	// calculate interval
-	nextExecutionTime := schedule.Next(time.Now())
-	interval := schedule.Next(nextExecutionTime).Sub(nextExecutionTime)
+	nextExecutionTime := General.Schedule.Next(time.Now())
+	General.Interval = General.Schedule.Next(nextExecutionTime).Sub(nextExecutionTime)
+
 	// check if interval is longer than 15 minutes
-	if interval.Minutes() < 15 {
+	if General.Interval.Minutes() < 15 {
 		return errors.New("schedule interval shorter than 15 minutes")
 	}
 

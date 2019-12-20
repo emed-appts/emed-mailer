@@ -17,8 +17,8 @@ import (
 	"github.com/pkg/errors"
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
+	"github.com/urfave/cli/v2"
 	"gopkg.in/robfig/cron.v2"
-	"gopkg.in/urfave/cli.v2"
 )
 
 func main() {
@@ -104,8 +104,6 @@ func main() {
 			if err != nil {
 				log.Fatal().
 					Msgf("%+v\n", errors.Wrap(err, "could not connect to db"))
-
-				return err
 			}
 			defer db.Close()
 
@@ -124,20 +122,25 @@ func main() {
 				Subject: config.Mail.Subject,
 			})
 			// run emed-mailer daemon
-			m.Run(stop)
+			err = m.Run(stop)
+			if err != nil {
+				log.Fatal().
+					Msgf("%+v\n", errors.Wrap(err, "could not run mailer daemon"))
+			}
 
 			// instantiate job
-			changedApptsJob := job.New(c, m)
+			initialLastRun := config.General.Schedule.Next(time.Now()).Add(-config.General.Interval)
+			changedApptsJob := job.New(c, m, initialLastRun)
 
-			cj := cron.New()
-			cj.AddFunc(config.General.Schedule, changedApptsJob.Run)
-			cj.Start()
+			cr := cron.New()
+			cr.Schedule(config.General.Schedule, cron.FuncJob(changedApptsJob.Run))
+			cr.Start()
 
 			sigs := make(chan os.Signal, 1)
 			signal.Notify(sigs, syscall.SIGINT, syscall.SIGTERM)
 			<-sigs
 
-			cj.Stop()
+			cr.Stop()
 			close(sigs)
 			close(stop)
 
