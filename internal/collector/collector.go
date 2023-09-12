@@ -32,7 +32,7 @@ func New(db *sql.DB) job.Collector {
 // CollectChangedAppts gathers changed appointments since `lastRun`
 func (collector *dbCollector) CollectChangedAppts(lastRun time.Time) ([]*job.ApptChange, error) {
 	// fetch all changed appointments since `lastRun`
-	rows, err := collector.db.Query("SELECT datlog, action, datum, zeit, pid, txt FROM pds6_kallog WHERE usc = 'eT' AND datlog > @p1 ORDER BY datlog ASC", lastRun)
+	rows, err := collector.db.Query("SELECT datlog, action, datum, zeit, pid, txt FROM pds7_kallog WHERE usc = 'eT' AND datlog > @p1 ORDER BY datlog ASC", lastRun)
 	if err != nil {
 		return nil, errors.Wrap(err, "could not query database")
 	}
