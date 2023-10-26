@@ -15,10 +15,10 @@ import (
 	"github.com/emed-appts/emed-mailer/internal/version"
 
 	"github.com/pkg/errors"
+	"github.com/robfig/cron/v3"
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
 	"github.com/urfave/cli/v2"
-	"gopkg.in/robfig/cron.v2"
 )
 
 func main() {

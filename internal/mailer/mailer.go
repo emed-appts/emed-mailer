@@ -6,7 +6,7 @@ import (
 	"time"
 
 	"github.com/rs/zerolog/log"
-	"gopkg.in/gomail.v2"
+	gomail "gopkg.in/mail.v2"
 )
 
 var (
