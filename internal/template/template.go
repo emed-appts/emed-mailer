@@ -1,18 +1,17 @@
-//go:generate retool do packr
-
 package template
 
 import (
+	_ "embed"
 	"html/template"
 	"io"
 	"time"
 
-	"github.com/gobuffalo/packr"
 	"github.com/pkg/errors"
 )
 
 var (
-	box = packr.NewBox("../../templates")
+	//go:embed changedappts.tmpl
+	msgTemplate string
 
 	funcMap = template.FuncMap{
 		"DateFmt": func(t time.Time) string {
@@ -23,12 +22,7 @@ var (
 
 // Execute executes the named template
 func Execute(wr io.Writer, name string, data interface{}) error {
-	msgTemplate, err := box.MustString(name)
-	if err != nil {
-		return errors.Wrap(err, "could not open template file")
-	}
-
-	t, err := template.New("message").Funcs(funcMap).Parse(string(msgTemplate))
+	t, err := template.New("message").Funcs(funcMap).Parse(msgTemplate)
 	if err != nil {
 		return errors.Wrap(err, "could not parse template")
 	}
